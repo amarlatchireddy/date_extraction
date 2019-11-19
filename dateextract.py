@@ -3,14 +3,20 @@ import pytesseract
 import cv2
 from dateutil.parser import parse
 import re
+from flask import Flask, request, jsonify, render_template
 import os
 from tqdm import tqdm
 import glob
 import base64
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return render_template('index.html')
 
+@app.route('/process',methods=['POST'])
 
 def process(image64):
-    print('started')
+    #print('started')
     #imgdata = base64.b64decode(path)
     #filename = 'some_image.jpg'  # I assume you have a way of picking unique filenames
     #with open(filename, 'wb') as f:
@@ -42,12 +48,15 @@ def process(image64):
                 try:
                     print(i)
                     date = parse(i)
-                    return date.strftime("%Y-%m-%d")
+                    date=date.strftime("%Y-%m-%d")
+                    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(date))
                 except:
                     pass
     return 'null'
 
 
 if __name__ == '__main__':
-    path_ = input("enter image path")
-    process(path_)
+    app.run(debug=True)
+
+   # path_ = input("enter image path")
+    #process(path_)
