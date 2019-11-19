@@ -1,1 +1,1 @@
-web: gunicorn app:dateextract
+web: gunicorn app:app
