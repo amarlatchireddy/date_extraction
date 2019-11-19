@@ -4,9 +4,7 @@ import cv2
 from dateutil.parser import parse
 import re
 from flask import Flask, request, jsonify, render_template
-import os
-from tqdm import tqdm
-import glob
+
 import base64
 app = Flask(__name__)
 @app.route('/')
@@ -15,13 +13,14 @@ def home():
 
 @app.route('/process',methods=['POST'])
 
-def process(image64):
+def process():
     #print('started')
     #imgdata = base64.b64decode(path)
     #filename = 'some_image.jpg'  # I assume you have a way of picking unique filenames
     #with open(filename, 'wb') as f:
         #f.write(imgdata)
-    imgdata = base64.b64decode(image64)
+    imgdata=request.form.values()
+    imgdata = base64.b64decode(imgdata)
     filename = 'some_image.png'  # I assume you have a way of picking unique filenames
     with open(filename, 'wb') as f:
         f.write(imgdata)
