@@ -11,7 +11,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/process',methods=['POST'])
+@app.route('/process')
 
 def process():
     #print('started')
