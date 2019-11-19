@@ -45,7 +45,6 @@ def process():
 
             if (len(i) >= 8):
                 try:
-                    print(i)
                     date = parse(i)
                     date=date.strftime("%Y-%m-%d")
                     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(date))
